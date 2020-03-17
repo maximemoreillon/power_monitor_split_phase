@@ -13,7 +13,8 @@ void MQTT_connection_manager(){
     if(MQTT_connected != 0){
       // MQTT connection status changed to "disconnected"
       MQTT_connected = 0;
-      Serial.println(F("[MQTT] Disconnected"));
+      Serial.print(F("[MQTT] Disconnected: "));
+      Serial.println(MQTT_client.state());
     }
         
     if(millis() - last_MQTT_connection_attempt > 1000){
@@ -48,13 +49,13 @@ void periodic_MQTT_publish(){
   long now = millis();
   
   if(now - last_publish_time > MQTT_PUBLISH_PERIOD){
+    
     last_publish_time = now;
-    StaticJsonDocument<200> outbound_JSON_message;
+    StaticJsonDocument<100> outbound_JSON_message;
   
     // Add the DHT reading to the JSON message
-    outbound_JSON_message["phase_1"] = (String) RMS_current_phase_1;
-    outbound_JSON_message["phase_2"] = (String) RMS_current_phase_2;
-    outbound_JSON_message["total"] = (String) (RMS_current_phase_1 + RMS_current_phase_2);
+    outbound_JSON_message["phase_1"] = (String) phase_1_measurement.RMS_current;
+    outbound_JSON_message["phase_2"] = (String) phase_2_measurement.RMS_current;
     
     // Serialize JSON into a char array
     char JSONmessageBuffer[100];
@@ -62,7 +63,7 @@ void periodic_MQTT_publish(){
 
     // Send the char array
     Serial.println(F("[MQTT] publish of power measurement"));
-    MQTT_client.publish(MQTT_STATUS_TOPIC, JSONmessageBuffer, MQTT_RETAIN);
+    MQTT_submit_return = MQTT_client.publish(MQTT_STATUS_TOPIC, JSONmessageBuffer, MQTT_RETAIN);
     
   }
 }

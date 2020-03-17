@@ -4,16 +4,14 @@ const String styles = "<style>"
   ".main{padding: 15px 50px; display: flex; flex-direction:column; align-items: stretch; text-align:center}"
   "#power_container{height: 50vh; border: 3px solid DimGrey; padding: 2px; display: flex; flex-direction: column-reverse;}"
   ".phase_power_container{width: 100%; display: flex; justify-content: center; align-items: center; color: white}"
-  "#phase_1_power_container{background-color: #4286f4;}"
-  "#phase_2_power_container{background-color: #12ba77;}"
+  "#phase_1_power_container{background-color: #4286f4;overflow:hidden;}"
+  "#phase_2_power_container{background-color: #12ba77;overflow:hidden;}"
   ".graph_container{height:20vh;}"
   "</style>";
 
 
 // Body partials
-const String header = "<div class='header'>"
-  + String(HOSTNAME) +
-  "</div>";
+const String header = "<div class='header'>Power monitor</div>";
 
 const String nav = "<div class='nav'>"
   "<a href='/'>Status</a>"
@@ -22,9 +20,9 @@ const String nav = "<div class='nav'>"
   "</div>";
   
 const String footer= "<div class='footer'>"
-  "<img src='https://maximemoreillon.com/images/logo/logo.png'>"
+  "<img src='https://cdn.maximemoreillon.com/logo/logo.png'>"
   "  <div>"
-  "    <div>Power monitor</div>"
+  "    <div>Power monitor v2</div>"
   "    <div>Maxime Moreillon</div>"
   "  </div>"
   "</div>";
@@ -38,10 +36,10 @@ String update_form = "<h2>Firmware update</h2>"
   
 // Combinations
 String head ="<head>"
-  "<title>" + String(HOSTNAME) +"</title>"
+  "<title>Power monitor</title>"
   + styles +
   "<meta name='viewport' content='width=device-width, initial-scale=1.0'>"
-  "<link rel='stylesheet' type='text/css' href='http://maximemoreillon.com/web_components/master_css/master.css'>"
+  "<link rel='stylesheet' type='text/css' href='https://cdn.maximemoreillon.com/master_css/master.css'>"
   "</head>";
 
 String pre_main = "<html>"
@@ -87,7 +85,7 @@ String plot_main = ""
   "<div class='graph_container' id='phase_1_graph'></div>"
   "<h2>Phase 2</h2>"
   "<div class='graph_container' id='phase_2_graph'></div>"
-  "<script src='https://webcomponents.maximemoreillon.com/graph/graph.js'></script>"
+  "<script src='https://cdn.maximemoreillon.com/graph/graph.js'></script>"
   "<script>"
   "var phase_1_graph = new Graph('phase_1_graph');"
   "var phase_2_graph = new Graph('phase_2_graph');"
