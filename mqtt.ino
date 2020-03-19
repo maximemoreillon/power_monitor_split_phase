@@ -56,6 +56,7 @@ void periodic_MQTT_publish(){
     // Add the DHT reading to the JSON message
     outbound_JSON_message["phase_1"] = (String) phase_1_measurement.RMS_current;
     outbound_JSON_message["phase_2"] = (String) phase_2_measurement.RMS_current;
+    outbound_JSON_message["total"] = (String) (phase_1_measurement.RMS_current + phase_2_measurement.RMS_current);
     
     // Serialize JSON into a char array
     char JSONmessageBuffer[100];

@@ -48,7 +48,7 @@
 #define CT_RATIO 2000.00
 
 // Timing
-#define WS_SEND_PERIOD 1000 // default 100
+#define WS_SEND_PERIOD 1000
 #define MQTT_PUBLISH_PERIOD 10000
 
 
